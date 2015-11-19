@@ -2,11 +2,17 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
+- [Vault changelog](#vault-changelog)
 - [TODO follow along on this thread](#todo-follow-along-on-this-thread)
 - [standalone curl windows with ssl](#standalone-curl-windows-with-ssl)
 - [install](#install)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+Vault changelog
+===============
+
+-   <https://github.com/hashicorp/vault/blob/master/CHANGELOG.md>
 
 TODO follow along on this thread
 ================================

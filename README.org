@@ -32,7 +32,7 @@ powershell -noprofile -executionpolicy unrestricted -file getcurl.ps1
 
 + start vault
 #+BEGIN_SRC 
-vault server -config=vault.hcl
+vault server -config=vf.hcl
 #+END_SRC
 
 https://vaultproject.io/intro/getting-started/deploy.html

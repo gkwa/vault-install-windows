@@ -55,7 +55,7 @@ install
 
 <!-- -->
 
-    vault server -config=vault.hcl
+    vault server -config=vf.hcl
 
 <https://vaultproject.io/intro/getting-started/deploy.html>
 

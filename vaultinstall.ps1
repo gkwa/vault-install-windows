@@ -16,7 +16,8 @@ function open_firewall()
 function main()
 {
     $vault_url = 'https://releases.hashicorp.com/vault/0.3.1/vault_0.3.1_windows_386.zip'
-    $vault_config_url='https://raw.githubusercontent.com/TaylorMonacelli/vault-install-windows/wip/vault.hcl'
+    $vault_config1_url='https://raw.githubusercontent.com/TaylorMonacelli/vault-install-windows/wip/vf.hcl'
+    $vault_config2_url='https://raw.githubusercontent.com/TaylorMonacelli/vault-install-windows/wip/vc.hcl'
 
     $vault_version = $vault_url -replace '\D+/([\d\.]+)/.*','$1'
     $vault_zip = $vault_url -replace '.*/(.*?.zip)$','$1'
@@ -42,8 +43,8 @@ function main()
         (new-object System.Net.WebClient).DownloadFile($vault_url, $vault_zip)
     }
 
-    (new-object System.Net.WebClient).DownloadFile($vault_config_url, 'vault.hcl')
-
+    (new-object System.Net.WebClient).DownloadFile($vault_config1_url, 'vf.hcl')
+    (new-object System.Net.WebClient).DownloadFile($vault_config2_url, 'vc.hcl')
 
 
 
@@ -93,7 +94,8 @@ function main()
     Get-Process | Where-Object {$_.Path -like "C:\ProgramData\vault\nssm.exe"} | Stop-Process
     Copy-Item "$odir\nssm.exe" C:\ProgramData\vault
     Copy-Item "$odir\vault.exe" C:\ProgramData\vault
-    Copy-Item "$odir\vault.hcl" C:\ProgramData\vault
+    Copy-Item "$odir\vf.hcl" C:\ProgramData\vault
+    Copy-Item "$odir\vc.hcl" C:\ProgramData\vault
 
     # $ws = New-Object -comObject WScript.Shell
     # $Dt = $ws.SpecialFolders.item("Desktop")
@@ -109,7 +111,7 @@ function main()
 
     nssm install Vault C:\ProgramData\vault\vault.exe confirm | out-file install.log
     nssm set Vault AppDirectory C:\ProgramData\vault | out-file install.log
-    nssm set Vault AppParameters server -config=C:\ProgramData\vault\vault.hcl | out-file install.log
+    nssm set Vault AppParameters server -config=C:\ProgramData\vault\vf.hcl | out-file install.log
     nssm set Vault DisplayName Vault | out-file install.log
     nssm set Vault Description Vault from HashiCorp | out-file install.log
     nssm set Vault Start SERVICE_AUTO_START | out-file install.log

@@ -35,6 +35,8 @@ powershell -noprofile -executionpolicy unrestricted -file getcurl.ps1
 vault server -config=vault.hcl
 #+END_SRC
 
+https://vaultproject.io/intro/getting-started/deploy.html
+
 + open another =cmd.exe= and 
 #+BEGIN_SRC 
 set VAULT_ADDR=http://127.0.0.1:8200

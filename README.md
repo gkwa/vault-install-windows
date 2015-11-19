@@ -57,6 +57,8 @@ install
 
     vault server -config=vault.hcl
 
+<https://vaultproject.io/intro/getting-started/deploy.html>
+
 -   open another `cmd.exe` and
 
 <!-- -->

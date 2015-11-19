@@ -3,7 +3,7 @@
 
 * TODO follow along on this thread
 + Follow up here: https://www.vaultproject.io/intro/getting-started/apis.html
-+ https://goo.gl/dX6dXx
++ https://groups.google.com/d/msg/vault-tool/wq2qF_RBRv0/J0egNVx9AgAJ
 
 * standalone curl windows with ssl
 + http://curl.haxx.se/download.html

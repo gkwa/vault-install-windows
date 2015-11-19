@@ -34,7 +34,9 @@ install
 
 -   install consul
     <https://github.com/TaylorMonacelli/consul-install-windows/tree/wip#install>
--   install vault
+-   bootstrap consul
+    <https://github.com/TaylorMonacelli/consul-install-windows/tree/wip#solution-re-bootstrap>
+-   install vault:
 
 <!-- -->
 
@@ -56,6 +58,8 @@ install
 <!-- -->
 
     vault server -config=vf.hcl
+    REM OR
+    vault server -config=vc.hcl
 
 <https://vaultproject.io/intro/getting-started/deploy.html>
 
@@ -65,4 +69,7 @@ install
 
     set VAULT_ADDR=http://127.0.0.1:8200
     curl -v -X PUT -d "{\"secret_shares\":1, \"secret_threshold\":1}" http://localhost:8200/v1/sys/init
+
+
+
 

@@ -83,9 +83,9 @@ function main()
 #    Remove-Item -Recurse -ErrorAction SilentlyContinue -Force C:\ProgramData\vault\data
 
 
-    $result = new-item -ItemType Directory -Force -Path C:\ProgramData\vault\data
+
     $result = new-item -ItemType Directory -Force -Path C:\ProgramData\vault\config
-    $result = new-item -ItemType Directory -Force -Path C:\ProgramData\vault\logs
+
 
 
     set-location C:\ProgramData\vault

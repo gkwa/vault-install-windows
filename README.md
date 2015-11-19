@@ -11,6 +11,8 @@ consul-install-windows
 TODO follow along on this thread
 ================================
 
+-   Follow up here:
+    <https://www.vaultproject.io/intro/getting-started/apis.html>
 -   <https://goo.gl/dX6dXx>
 
 standalone curl windows with ssl

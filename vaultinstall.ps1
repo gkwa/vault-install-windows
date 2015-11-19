@@ -84,7 +84,7 @@ function main()
 
 
 
-    $result = new-item -ItemType Directory -Force -Path C:\ProgramData\vault\config
+    $result = new-item -ItemType Directory -Force -Path C:\ProgramData\vault
 
 
 
@@ -93,7 +93,7 @@ function main()
     Get-Process | Where-Object {$_.Path -like "C:\ProgramData\vault\nssm.exe"} | Stop-Process
     Copy-Item "$odir\nssm.exe" C:\ProgramData\vault
     Copy-Item "$odir\vault.exe" C:\ProgramData\vault
-    Copy-Item "$odir\vault.hcl" C:\ProgramData\vault\config
+    Copy-Item "$odir\vault.hcl" C:\ProgramData\vault
 
     # $ws = New-Object -comObject WScript.Shell
     # $Dt = $ws.SpecialFolders.item("Desktop")
@@ -109,7 +109,7 @@ function main()
 
     nssm install Vault C:\ProgramData\vault\vault.exe confirm | out-file install.log
     nssm set Vault AppDirectory C:\ProgramData\vault | out-file install.log
-    nssm set Vault AppParameters server -config=C:\ProgramData\vault\config\vault.hcl | out-file install.log
+    nssm set Vault AppParameters server -config=C:\ProgramData\vault\vault.hcl | out-file install.log
     nssm set Vault DisplayName Vault | out-file install.log
     nssm set Vault Description Vault from HashiCorp | out-file install.log
     nssm set Vault Start SERVICE_AUTO_START | out-file install.log

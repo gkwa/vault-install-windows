@@ -78,8 +78,39 @@ curl -v -X PUT -d "{\"secret_shares\":1, \"secret_threshold\":1}" http://localho
 
 Powershell
 #+BEGIN_SRC
-curl --silent -X DELETE http://localhost:8500/v1/kv/?recurse | out-null; vault init | Foreach { if ($_ -match '^Key (.): (\w+)') { "vault unseal " + $matches[2] }elseif ($_ -match '^Initial Root Token: ([-\w]+)') { "vault auth " + $matches[1] }}
+$Env:VAULT_ADDR='http://127.0.0.1:8200'
+curl --silent -X DELETE http://localhost:8500/v1/kv/?recurse | out-null; vault init | Foreach { if ($_ -match '^Key (.): (\w+)') { "vault unseal " + $matches[2] }elseif ($_ -match '^Initial Root Token: ([-\w]+)') { "vault auth " + $matches[1] }} | clip.exe
 #+END_SRC
+****
+
+<# output is similar to this:
+
+curl -X PUT -d '{\"key\": \"2109177006b3a2aff51143ae2ff26df182a5976dd72c648bf908a461c176dc2201\"}' http://127.0.0.1:8200/v1/sys/unseal
+curl -X PUT -d '{\"key\": \"676244d5f7f76933e4ccc2a4d635ea1ce2561a88be90258993107f76b893abee02\"}' http://127.0.0.1:8200/v1/sys/unseal
+curl -X PUT -d '{\"key\": \"2eb75d900ae901485df68250c8d560ae48af46b6ca627e340da0fc98a6483c6e03\"}' http://127.0.0.1:8200/v1/sys/unseal
+curl -X PUT -d '{\"key\": \"3487615d7a9a40452e848589a581f57d85e9cd5460b08d06f592989e66abe97d04\"}' http://127.0.0.1:8200/v1/sys/unseal
+curl -X PUT -d '{\"key\": \"7d5278188784283e97bec57dbb617fcf2f10916a1442d6bb6b221b7078707efd05\"}' http://127.0.0.1:8200/v1/sys/unseal
+curl -X POST -H "X-Vault-Token:472dcf42-8a9e-1413-9c80-8817667270e2" -d '{\"type\":\"app-id\"}' http://127.0.0.1:8200/v1/sys/auth/app-id
+
+#>
+
+
+
+set VAULT_ADDR=http://127.0.0.1:8200
+vault unseal 760fb1d2765e98b54b336228767dba1f759dd83ac0efc77c779c48ff8f32ebee01
+vault unseal 1af33b0b46cc169041f56d228287af787ee19f1202fa98b474aa231a4899de0402
+vault unseal c51880161fd9a7473cb3c078fce2bb0f6afd69db8ebbd0e03e4d5321bccb62fd03
+vault unseal 8c8f0389bcdc549ada5e316fc472089d833a5491ff738bdbf6d2cff530e6dbf404
+vault unseal 5364b894e5c9e54da7189c35ba171cea9726a2587332c38fbc35bfcec4b4670d05
+vault auth a29c7fd6-2027-691a-6fa8-666347cc231f
+
+
+
+$Env:VAULT_ADDR='http://127.0.0.1:8200'
+curl --silent -X DELETE http://localhost:8500/v1/kv/?recurse | out-null; vault init | Foreach { if ($_ -match '^Key (.): (\w+)') { "vault unseal " + $matches[2] }elseif ($_ -match '^Initial Root Token: ([-\w]+)') { "vault auth " + $matches[1] }} | clip.exe
+
+
+
 *** manual steps
 + check what vault data is already in consul
 + delete vault data from consul
@@ -95,4 +126,3 @@ vault unseal <key3>
 vault auth <root token>
 vault write secret/hello value=world
 #+END_SRC
-

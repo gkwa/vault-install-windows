@@ -18,6 +18,7 @@ function main()
     $vault_url = 'https://releases.hashicorp.com/vault/0.3.1/vault_0.3.1_windows_386.zip'
     $vault_config1_url='https://raw.githubusercontent.com/TaylorMonacelli/vault-install-windows/wip/vf.hcl'
     $vault_config2_url='https://raw.githubusercontent.com/TaylorMonacelli/vault-install-windows/wip/vc.hcl'
+    $vault_unseal_url='https://raw.githubusercontent.com/TaylorMonacelli/vault-install-windows/wip/unseal.ps1'
 
     $vault_version = $vault_url -replace '\D+/([\d\.]+)/.*','$1'
     $vault_zip = $vault_url -replace '.*/(.*?.zip)$','$1'
@@ -45,7 +46,7 @@ function main()
 
     (new-object System.Net.WebClient).DownloadFile($vault_config1_url, 'vf.hcl')
     (new-object System.Net.WebClient).DownloadFile($vault_config2_url, 'vc.hcl')
-
+    (new-object System.Net.WebClient).DownloadFile($vault_unseal_url, 'unseal.ps1')
 
 
     if(!(test-path "$cdir\7za.exe"))

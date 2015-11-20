@@ -111,7 +111,7 @@ function main()
 
     nssm install Vault C:\ProgramData\vault\vault.exe confirm | out-file install.log
     nssm set Vault AppDirectory C:\ProgramData\vault | out-file install.log
-    nssm set Vault AppParameters server -config=C:\ProgramData\vault\vf.hcl | out-file install.log
+    nssm set Vault AppParameters server -config=C:\ProgramData\vault\vc.hcl | out-file install.log
     nssm set Vault DisplayName Vault | out-file install.log
     nssm set Vault Description Vault from HashiCorp | out-file install.log
     nssm set Vault Start SERVICE_AUTO_START | out-file install.log

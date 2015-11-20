@@ -2,6 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 consul-install-windows
 
+- [powershell -noprofile -executionpolicy unrestricted -file unseal.ps1](#powershell--noprofile--executionpolicy-unrestricted--file-unsealps1)
 - [start fresh](#start-fresh)
   - [delete vault key/value store from consul using curl](#delete-vault-keyvalue-store-from-consul-using-curl)
   - [delete vault key/value store from consul using webui](#delete-vault-keyvalue-store-from-consul-using-webui)
@@ -15,8 +16,11 @@ consul-install-windows
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-\$Env:VAULT~ADDR~='<http://127.0.0.1:8200>' powershell -noprofile
--executionpolicy unrestricted -file unseal.ps1
+powershell -noprofile -executionpolicy unrestricted -file unseal.ps1
+====================================================================
+
+    $Env:VAULT_ADDR='http://127.0.0.1:8200'
+    powershell -noprofile -executionpolicy unrestricted -file unseal.ps1
 
 start fresh
 ===========

@@ -1,5 +1,9 @@
 * start fresh
 
+Clear consul data using curl on consul.
+
+** delete vault key/value store from consul using curl
+
 https://www.consul.io/intro/getting-started/kv.html
 
 Deleting keys is simple as well, accomplished by using the DELETE
@@ -7,11 +11,13 @@ verb. We can delete a single key by specifying the full path, or we can
 recursively delete all keys under a root using "?recurse":
 
 #+BEGIN_SRC
-$ curl -X DELETE http://localhost:8500/v1/kv/web/sub?recurse
-$ curl http://localhost:8500/v1/kv/web?recurse
-[{"CreateIndex":97,"ModifyIndex":97,"Key":"web/key1","Flags":0,"Value":"dGVzdA=="},
- {"CreateIndex":98,"ModifyIndex":98,"Key":"web/key2","Flags":42,"Value":"dGVzdA=="}]
+curl http://localhost:8500/v1/kv/?recurse
+curl -X DELETE http://localhost:8500/v1/kv/?recurse
 #+END_SRC
+
+** delete vault key/value store from consul using webui
+
+http://localhost:8500/ui/#/seattle/kv/
 
 * Vault changelog
 + https://github.com/hashicorp/vault/blob/master/CHANGELOG.md
@@ -25,6 +31,9 @@ $ curl http://localhost:8500/v1/kv/web?recurse
 + http://goo.gl/KnjCfs
 + http://www.paehl.com/open_source/?CURL_7.45.0
 + http://www.paehl.com/open_source/?download=curl_745_0_ssl.zip&PHPSESSID=bddfc7e7e19a5daf19e7879f5f5f5496
+
+curl http://localhost:8500/v1/kv/web?recurse
+curl http://localhost:8500/v1/secret
 
 * install
 
@@ -61,11 +70,29 @@ set VAULT_ADDR=http://127.0.0.1:8200
 curl -v -X PUT -d "{\"secret_shares\":1, \"secret_threshold\":1}" http://localhost:8200/v1/sys/init
 #+END_SRC
 
+** Initialize vault
+*** oneline for repeated tests
++ delete vault data from consul
++ vault initialize to consul backend
++ write out commands to unseal
 
-
-
-
-#+BEGIN_SRC 
-
-
+Powershell
+#+BEGIN_SRC
+curl --silent -X DELETE http://localhost:8500/v1/kv/?recurse | out-null; vault init | Foreach { if ($_ -match '^Key (.): (\w+)') { "vault unseal " + $matches[2] }elseif ($_ -match '^Initial Root Token: ([-\w]+)') { "vault auth " + $matches[1] }}
 #+END_SRC
+*** manual steps
++ check what vault data is already in consul
++ delete vault data from consul
++ initialze
++ unseal
+#+BEGIN_SRC
+curl http://localhost:8500/v1/kv/?recurse
+curl -X DELETE http://localhost:8500/v1/kv/?recurse
+vault init
+vault unseal <key1>
+vault unseal <key2>
+vault unseal <key3>
+vault auth <root token>
+vault write secret/hello value=world
+#+END_SRC
+

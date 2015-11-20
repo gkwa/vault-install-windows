@@ -19,4 +19,6 @@ if(!(test-path "$cdir\$curl_zip"))
 $result = new-item -ItemType Directory -Force -Path C:\ProgramData\curl
 Copy-Item .\curl.exe C:\ProgramData\curl
 
-cmd /c mklink $env:windir\system32\curl.exe C:\ProgramData\curl\curl.exe | out-file install.org
+if(!(test-path $env:windir\system32\curl.exe)){
+				cmd /c mklink $env:windir\system32\curl.exe C:\ProgramData\curl\curl.exe | out-file install.org
+}

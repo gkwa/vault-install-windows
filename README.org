@@ -1,3 +1,8 @@
+* 
+
+$Env:VAULT_ADDR='http://127.0.0.1:8200'
+powershell -noprofile -executionpolicy unrestricted -file unseal.ps1
+
 * start fresh
 
 Clear consul data using curl on consul.

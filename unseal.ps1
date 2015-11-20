@@ -1,7 +1,11 @@
 net stop vault
 net start vault
 
+
+
 curl --silent -X DELETE http://localhost:8500/v1/kv/?recurse | out-null
+
+$Env:VAULT_ADDR='http://127.0.0.1:8200'
 
 $out1 = vault init | Foreach {
     if ($_ -match '^Key.*: (\w+)')
@@ -18,8 +22,9 @@ curl -X POST -H "X-Vault-Token:$token" -d '{\"type\":\"app-id\"}' http://127.0.0
     }
 }
 
-$out1
 $Env:VAULT_ADDR='http://127.0.0.1:8200'
+$out1
+
 
 <# output is similar to this:
 
